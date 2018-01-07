@@ -6,7 +6,7 @@ class Topic(models.Model):
     text = models.CharField(max_length= 200 )
     date_added = models.DateTimeField(auto_now_add= True)
     owner = models.ForeignKey(User,on_delete=models.CASCADE)
-    def _str_(self):
+    def __str__(self):
         """返回类型的字符串表示"""
         return self.text
 
@@ -19,6 +19,6 @@ class Entry(models.Model):
     class Meta:
         verbose_name_plural = 'entries'
 
-    def _str_(self):
+    def __str__(self):
         """返回模型的字符串表示"""
         return self.text[:50]+"..."
