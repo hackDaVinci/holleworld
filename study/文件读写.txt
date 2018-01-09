@@ -1,0 +1,168 @@
+"""文件操作.read() .seek(n)移动指针位置  .close()关闭文件连接 .write()写入字符串  .flush()不关闭
+文件的情况下输出缓存到磁盘 如何要增加文件内容用'a' ，'w'会替换文件内容"""
+Microsoft Windows [版本 10.0.16299.192]
+(c) 2017 Microsoft Corporation。保留所有权利。
+
+C:\Users\King>dir
+ 驱动器 C 中的卷没有标签。
+ 卷的序列号是 44B3-CC24
+
+ C:\Users\King 的目录
+
+2018/01/07  20:33    <DIR>          .
+2018/01/07  20:33    <DIR>          ..
+2017/08/06  22:15    <DIR>          .android
+2017/06/28  14:24    <DIR>          .cordova
+2018/01/07  20:33               180 .gitconfig
+2017/09/13  10:29    <DIR>          .PyCharm2017.2
+2018/01/04  22:49    <DIR>          3D Objects
+2018/01/04  22:49    <DIR>          Contacts
+2018/01/09  15:50    <DIR>          Desktop
+2018/01/04  22:49    <DIR>          Documents
+2018/01/04  22:49    <DIR>          Downloads
+2018/01/04  22:49    <DIR>          Favorites
+2018/01/04  22:49    <DIR>          Links
+2018/01/04  22:49    <DIR>          Music
+2017/06/28  16:44    <DIR>          OneDrive
+2018/01/04  22:49    <DIR>          Pictures
+2018/01/04  22:49    <DIR>          Saved Games
+2018/01/04  22:49    <DIR>          Searches
+2018/01/04  22:49    <DIR>          Videos
+               1 个文件            180 字节
+              18 个目录  7,434,375,168 可用字节
+
+C:\Users\King>cd desktop
+
+C:\Users\King\Desktop>course = open('course.txt','w',encoding='UTF-8')
+'course' 不是内部或外部命令，也不是可运行的程序
+或批处理文件。
+
+C:\Users\King\Desktop>python
+Python 3.6.0 (v3.6.0:41df79263a11, Dec 23 2016, 08:06:12) [MSC v.1900 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> course = open('course.txt','w',encoding='UTF-8')
+>>> course.write('I'm:赵子龙\n')
+  File "<stdin>", line 1
+    course.write('I'm:赵子龙\n')
+                    ^
+SyntaxError: invalid syntax
+>>> course.write('I\'m:赵子龙\n')
+8
+#python自带垃圾回收，但也要养成关闭文件的习惯
+>>> course.close()
+>>> names=['Tom','Jerry','Mike','Peter']
+>>> course.writelines(names)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: I/O operation on closed file.
+>>> open(course)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: expected str, bytes or os.PathLike object, not _io.TextIOWrapper
+>>> open(r^C:\Users\King\Desktop\course)
+  File "<stdin>", line 1
+    open(r^C:\Users\King\Desktop\course)
+            ^
+SyntaxError: invalid syntax
+>>> open(r'C:\Users\King\Desktop\course)
+  File "<stdin>", line 1
+    open(r'C:\Users\King\Desktop\course)
+                                       ^
+SyntaxError: EOL while scanning string literal
+>>> open(r'C:\Users\King\Desktop\course')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\King\\Desktop\\course'
+>>> pwd
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'pwd' is not defined
+>>> open(r'C:\Users\King\Desktop\course.txt')
+<_io.TextIOWrapper name='C:\\Users\\King\\Desktop\\course.txt' mode='r' encoding='cp936'>
+>>> course.writelines(names)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ValueError: I/O operation on closed file.
+>>> course.close()
+>>> f = open(r'C:\Users\King\Desktop\course.txt')
+>>> f.writelines(names)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+io.UnsupportedOperation: not writable
+>>> f = open(r'C:\Users\King\Desktop\course.txt','w')
+>>> f.writelines(names)
+>>> f.close()
+>>> f = open(r'C:\Users\King\Desktop\course.txt','w')
+>>> names = [name+"\n" for name in names]
+>>> f.writelines(names)
+>>> f.flush()
+>>> f = open(r'C:\Users\King\Desktop\course.txt','a')
+>>>  f.writelines(names)
+  File "<stdin>", line 1
+    f.writelines(names)
+    ^
+IndentationError: unexpected indent
+>>> f.writelines(names)
+>>> f.flush()
+>>> f.close()
+# with open('path','模式',encoding='编码') as 对象名   （自带回收） 
+>>> with open(r'C:\Users\King\Desktop\course.txt','r') as f;
+  File "<stdin>", line 1
+    with open(r'C:\Users\King\Desktop\course.txt','r') as f;
+                                                           ^
+
+>>> with open(r'C:\Users\King\Desktop\course.txt','r') as f:
+...     for line in f:
+...             print(line)
+...
+Tom
+
+Jerry
+
+Mike
+
+Peter
+
+Tom
+
+Jerry
+
+Mike
+
+Peter
+
+>>> with open(r'C:\Users\King\Desktop\course.txt','r') as f:
+...     for line in f:
+...             if line!="\\n":
+...                     print(line)
+...
+Tom
+
+Jerry
+
+Mike
+
+Peter
+
+Tom
+
+Jerry
+
+Mike
+
+Peter
+
+#print自带换行，修改为空  end=''
+>>> with open(r'C:\Users\King\Desktop\course.txt','r') as f:
+...     for line in f:
+...             print(line,end='')
+...
+Tom
+Jerry
+Mike
+Peter
+Tom
+Jerry
+Mike
+Peter
+>>>
