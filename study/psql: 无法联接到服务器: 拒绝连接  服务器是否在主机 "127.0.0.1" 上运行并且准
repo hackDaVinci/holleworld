@@ -1,0 +1,50 @@
+解决方法：卸载所有相关postgres 446行 再重装
+423  netstat -ntpl
+  424  systemctl status postgres
+  425  systemctl 
+  426  systemctl |grep postgres
+  427  apt-cache policy postgres
+  428  apt-cache policy postgresql
+  429  dpkg -l|grep postgres
+  430  apt-get install postgresql-9.6
+  431  sudo apt-get install postgresql-9.6
+  432  systemctl -h
+  433  systemctl 
+  434  systemctl |sort
+  435  sudo apt-get remove --purge postgresql
+  436  dpkg -l|grep postgresql
+  437  dpkg -l|grep postgresql|tr -s' '
+  438  dpkg -l|grep postgresql|tr -S' '
+  439  tr
+  440  man tr
+  441  dpkg -l|grep postgresql|tr -s ' '
+  442  dpkg -l|grep postgresql|tr -s ' '|cut -d' ' -f1
+  443  dpkg -l|grep postgresql|tr -s ' '|cut -d' ' -f2
+  444  list=<<EOS
+postgresql-9.6
+postgresql-client
+postgresql-client-10
+postgresql-client-9.6
+postgresql-client-common
+postgresql-common
+postgresql-contrib-9.6
+EOS
+
+  445  echo $list
+  446  sudo apt-get remove --purge postgresql-9.6 postgresql-client postgresql-client-10 postgresql-client-9.6 postgresql-client-common postgresql-common postgresql-contrib-9.6 
+  447  dpkg -l |grep postgers
+  448  dpkg -l |grep postg
+  449  sudo rm -rf /var/lib/postgresql/
+  450  sudo apt-get install postgresql
+  451  sudo apt-get install postgresql-9.6
+  452  psql
+  453  cat /var/log/postgresql/postgresql-9.6-main.log
+  454  sudo systemctl status postgresql
+  455  sudo systemctl enable postgresql
+  456  sudo systemctl status postgresql
+  457  sudo systemctl start postgresql
+  458  sudo systemctl status postgresql
+  459  netstat -pntl
+  460  sudo -u postgres psql
+  461  psql
+  462  sudo -u postgres psql
