@@ -1,0 +1,3 @@
+思路，数据库user权限不够,提高user权限
+sudo -u postgres psql postgres //登录之后给默认用户“postgres”设置密码
+默认用户为最高权限
