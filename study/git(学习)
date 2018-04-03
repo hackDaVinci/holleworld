@@ -1,0 +1,27 @@
+git config -l查看git配置
+git clone ssh加文件名
+git remote add ?? ssh 远程仓库添加？？？
+git push ?? master把本地master推到??仓库
+先添加？？？地址
+git config -e 修改orige与？？？
+remote远程
+推送git push origin 本地:远程
+git push -u设置本地与远程的联系
+删除本地分支git branch -d 分支名
+remote.origin.url=git@gitlab.tanmer.com:tanmer-corp/our-basic-rails.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+git fetch下载仓库
+git log 看到分支的更改情况
+当出现冲突时（打开冲突文件，完成最终代码）
+直接git commit(两个仓库之间的合并)
+git remote(查看仓库名)
+git add HEAD <filename>
+git revert (commit:???)到了远程 撤销命令
+git show ？？？可以看到commit做了什么改变
+git reset (commit :???) git log see ???
+两个commit比较 删除多的内容
+git chechout多的commit
+git checkout -b merge-my-job
+git checkout merge-my-job 
+git cherry-pick 少的commit
+git branch -d 分支名 删除分支
