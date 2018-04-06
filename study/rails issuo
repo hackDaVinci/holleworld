@@ -1,0 +1,14 @@
+#mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+run: apt-get  isntall   ruby-dev  
+
+#gem isntall pg报错
+sudo apt-get install libpq-dev
+
+#解决rvm 下的ruby只能在/bin/bash --login下运行
+
+echo '[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"' >>~/.bashrc
+source ~/.bashrc
+ruby -v
+
+#解决uuid 权限问题
+alter user 'username' superuser createrole createdb replication;
