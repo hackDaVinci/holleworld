@@ -25,3 +25,4 @@ git checkout -b merge-my-job
 git checkout merge-my-job 
 git cherry-pick 少的commit
 git branch -d 分支名 删除分支
+git checkout -- .撤销全部修改
