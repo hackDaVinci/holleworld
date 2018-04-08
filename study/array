@@ -1,0 +1,62 @@
+添加元素到数组
+
+arr = [1,2,3,4]
+
+最前面添加
+arr.unshift(5)
+arr = [5,1,2,3,4]
+arr.shift取出第一个数
+arr   
+最后面添加
+arr.push(5)
+arr = [1,2,3,4,5]
+arr.pop取出最后一个数
+中间指定添加
+a.insert(位置,内容)
+在位置前一位插入
+arr = [1,2,5,3,4]
+arr.delete_at[位置] 
+arr.slice![位置]
+arr.[address,length]
+
+数组循环输出
+arr.each do |item|
+   puts item
+end 
+
+arr.each_with_index do |item, index|
+
+arr.map {|item| item * 2}
+选择
+arr.select {|item| item>2 }
+删除条件内
+arr.delete_if{|item| item>2 }
+数组排序
+arr.sort
+j数组降序
+arr.sort{|a,b| a<=>b}
+arr.sort{|a,b| b<=>a}
+包含
+arr.include? 2
+arr.index{|item| item[:name] == ''}
+返回位置
+arr.find{|item| item[:name] == ''}
+返回json
+
+数组定义字符串
+%w{welcome to 23 34}
+
+{}可以换为其他符号
+w可以省略 =>字符串
+%w => 字符串数组
+%s => 符号
+%r => 正则表达式
+
+range(1...3)三个点时最后一个数不执行
+
+rails r ./db/init_permissions.rb 
+报错：FATAL: Listen error: unable to monitor directories for changes.
+Visit https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers for info on how to fix this.
+
+
+run:       echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
