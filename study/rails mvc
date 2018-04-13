@@ -1,0 +1,42 @@
+db:setup 不等于db:migrate db:seed
+
+
+  mvc  
+
+.erb文件被其他文件解析
+controller 继承controller 
+layout继承父级
+继承actionController::base 继承文件在layout
+
+csrf_meta_tags 阻止非法提交表单
+
+/*
+*
+*= 是语法你敢信？？？？？？？？
+*/
+
+
+cd ..上级文件夹  cd .当前文件夹
+
+
+javascript_pack_tag在app/javascript/packs
+render的文件 _开头
+
+
+添加网页步骤
+   1：添加路由 在route.rb中get '???':'???#index'   get : 
+ 	rails routes
+   2: 添加？？？_controller.rb
+	添加继承类
+   3: 在views下添加???文件
+	layout: false不继承
+
+
+
+
+ruby所有变量小写 大写的是类 
+time_ago_in_words（@product.created_at）
+number_to_currency()
+rubygems.org
+
+rails.logger.debug
