@@ -1,0 +1,36 @@
+增加表
+rails g model water_temperature position:integer name:string en_name:string
+删除新增错误的表
+rails d model water_temperature position:integer name:string en_name:string
+新增表字段
+rails g migration add_column_water_temperature_id_into_product
+
+def up
+    add_column :products, :water_temperature_id, :integer
+  end
+  def down
+    remove_column :water_temperature_id
+  end
+  删除表字段
+  rails g migration remove_column_water_temperature_id_into_product
+  def change
+    remove_column :skus, :face_price_id
+  end
+  修改字段
+  rails g migration rename_column_seat_powers_id_into_product
+  def up
+    rename_column :products, :seat_powers_id, :seat_power_id
+  end
+
+  def down
+    rename_column :products, :seat_power_id, :seat_powers_id
+  end
+  修改字段属性
+  rails g migration change_column_seat_powers_into_product
+  def up
+    change_column :products, :seat_powers, :string
+  end
+
+  def down
+    change_column :products, :seat_powers, :integer
+  end
