@@ -12,3 +12,6 @@ ruby -v
 
 #解决uuid 权限问题
 alter user username superuser createrole createdb replication;
+
+#新增的webpacker 须要与rails 相关联  
+bundle exec rails webpacker:install
