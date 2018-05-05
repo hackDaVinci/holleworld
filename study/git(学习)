@@ -26,3 +26,19 @@ git checkout merge-my-job
 git cherry-pick 少的commit
 git branch -d 分支名 删除分支
 git checkout -- .撤销全部修改
+
+//git合并冲突
+git stash //暂停保存到当前分支
+git pull //下载最新代码
+git stash pop //查看冲突代码，本地修改
+
+2.如果我们只是简单的想让服务器改动的代码替换本地改动的代码，也就是我们放弃了本地改动，那么可以执行
+git checkout [本地变动文件的路径]这样，可以使该文件回到上次提交的状态，再拉取代码就不会有什么冲突。  
+
+3.如果我们想让服务器代码完全替换和覆盖我们本地的代码改动，那么只需要执行
+
+git fetch origin
+git reset --hard origin/master
+
+4.有时候我们修改完代码，git push的时候，会遇到报错。 如下同样是因为冲突的问题
+只需要再git pull 一下，同样会发现在文件里边出现了如上图第三张的标记提示，依然手动处理冲突，在重新进行一次提交即可。
