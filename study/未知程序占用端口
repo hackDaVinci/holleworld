@@ -1,0 +1,2 @@
+ ps aux|grep 1812 查到端口1812
+ sudo usermod -aG *** z  ####把用户追加到某些组中
