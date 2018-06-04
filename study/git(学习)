@@ -42,3 +42,9 @@ git reset --hard origin/master
 
 4.有时候我们修改完代码，git push的时候，会遇到报错。 如下同样是因为冲突的问题
 只需要再git pull 一下，同样会发现在文件里边出现了如上图第三张的标记提示，依然手动处理冲突，在重新进行一次提交即可。
+
+
+1. add并且commit，再checkout，提交到当前分支  
+2. add但不commit，可以stash，然后checkout回来之后stash apply，在commit，提交到当前分支  
+3. add但不commit，也不stash，直接checkout，然后再commit的话，记录就在切换分支下面。 
+
