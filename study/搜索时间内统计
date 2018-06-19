@@ -1,0 +1,37 @@
+字段：car_ledger_detail_id （车辆编号） 
+           requires :travel_mileage, type: Integer, desc: '本月行驶里程'
+           requires :tolal_month_mileage, type: Integer, desc: '本月里程表总数'
+           requires :oil_consum, type: Integer, desc: '本月用油'
+           optional :maint_cost, type: Integer, desc: '本月维修费'
+统计：在搜索时间内 把同一辆车的行驶里程 用油 维修费加起来。
+时间范围搜索 search_time_range;
+def search_time_range(query, time_fields = [])
+  time_fields.each do |tf|
+    query = query.where(tf+' >= ?', DateTime.parse(params[:_search][(tf+'_from').to_sym])) if params.dig(:_search, (tf+'_from').to_sym).present?
+    query = query.where(tf+' <= ?', DateTime.parse(params[:_search][(tf+'_to').to_sym])) if params.dig(:_search, (tf+'_to').to_sym).present?
+  end
+  query
+end
+
+get do
+      authorize! :show, 'CarMonthRegister'
+        query = ::CarMonthRegister.includes(:car_ledger_detail, :staff_no).all
+        query = search_time_range(query, %w/use_month/)
+        query = search_scope(query, {or: params[:search_with_or]})
+        i = 1
+        lastquery = []
+        while i < CarLedgerDetail.count(:car_no)+1
+          samequery = 0
+          samequery = [
+            car_ledger_detail_id: CarLedgerDetail.find(i).car_no,
+            travel_mileage: query.where(car_ledger_detail_id: i).sum(:travel_mileage),
+            oil_consum: query.where(car_ledger_detail_id: i).sum(:oil_consum),
+            maint_cost: query.where(car_ledger_detail_id: i).sum(:maint_cost),
+            tolal_month_mileage: query.where(car_ledger_detail_id: i).maximum(:tolal_month_mileage)
+          ]
+          lastquery = lastquery + samequery
+          i +=1
+        query = lastquery
+      end 
+      success! query, with: API::V1::Entities::CarMonthRegister
+    end
