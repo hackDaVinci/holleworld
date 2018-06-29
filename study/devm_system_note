@@ -38,3 +38,10 @@ end
         else
         failed! employee
       end
+      
+二：自定义日期显示和时区转换
+    export function toLocalAndMonth(time) {
+      var localtime = moment(time).add(32, 'h')
+      time = moment(localtime).format('YYYY-MM')
+      return time
+    }
