@@ -1,0 +1,40 @@
+一:第三方创建用户 omniauth-tanmer 私有gem
+1：  in sso/users_controller.rb
+class Api::V1::UsersController < Api::V1::BaseController
+  skip_before_action :doorkeeper_authorize!, only: [:create]
+  before_action :verify_signature!, only: [:create]
+
+  def profile
+    h = current_user.api_json(with_permissions: true)
+    h.update('token_scopes' => doorkeeper_token.scopes.to_a) if doorkeeper_token
+    render json: h
+    # current_user.of_app current_app do |user|
+    #   render json: user.as_json(only: [:name, :email, :image], methods: [:uid, :permission_keys])
+    # end
+    # j = current_user.as_json(only: [:name, :email, :image], methods: [:uid, :app_permission_keys], app: current_app)
+    # render json: j
+  end
+
+  # 通过iw前台创建用户
+  # 只能开放用户创建功能，不能开放修改和删除功能。
+  # 允许创建用户，只是方便他们自动创建SSO用户而已，所以安全没有影响
+  def create
+    user = User.new(params.slice(:email, :name, :username, :mobile_phone, :password).as_json.compact)
+    if user.save
+      render json: APICode.get(:success, user)
+    else
+      render json: APICode.get(:failed_to_create_user, user.errors)
+    end
+  end
+
+end
+2：in api create_place
+     if employee.save
+        if params[:register] == true
+          u=Omniauth::Tanmer::User.new(ENV['OAUTH_TANMER_HOST'], ENV['OAUTH_TANMER_KEY'], ENV['OAUTH_TANMER_SECRET'])
+          resp = u.create(name: params[:name], username: params[:name], mobile_phone: (params[:telephone]).to_s, email: params[:eamil])
+        end
+        success!
+        else
+        failed! employee
+      end
