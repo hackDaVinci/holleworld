@@ -52,3 +52,6 @@ git reset --hard origin/master
 git fetch --all
 git reset --hard origin/master
 
+６　有多个秘钥时，把密码添加到ssh-agent
+eval "$(ssh-agent -s)"
+ssh-add
