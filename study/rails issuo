@@ -15,3 +15,7 @@ alter user username superuser createrole createdb replication;
 
 #新增的webpacker 须要与rails 相关联  
 bundle exec rails webpacker:install
+
+#查询项目中所有表的名称
+Rails.application.eager_load!
+ApplicationRecord.descendants.collect { |type| type.name}
