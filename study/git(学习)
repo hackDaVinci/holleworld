@@ -55,3 +55,6 @@ git reset --hard origin/master
 ６　有多个秘钥时，把密码添加到ssh-agent
 eval "$(ssh-agent -s)"
 ssh-add
+
+７　字符串中提取汉字
+gsub(/[^\u4e00-\u9fa5]/,'')
