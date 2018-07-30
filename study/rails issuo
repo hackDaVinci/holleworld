@@ -19,3 +19,6 @@ bundle exec rails webpacker:install
 #查询项目中所有表的名称
 Rails.application.eager_load!
 ApplicationRecord.descendants.collect { |type| type.name}
+
+# 静态页面代码下载工具
+sudo apt-get install webhttrack
