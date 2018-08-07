@@ -1,0 +1,13 @@
+#1 驼峰转下划线格式
+className = "HelloWorldRuby"
+=> "HelloWorldRuby"
+classNameSnake = className.gsub(/(?=[A-Z])/, "_")
+=> "_Hello_World_Ruby"
+classNameSnakeLower = classNameSnake.downcase[1..-1]
+ => "hello_world_ruby"
+ 
+ #2 蛇行转驼峰格式
+s = "hello_world_ruby"  
+ => "hello_world_ruby"   
+s.split("_").map {|w| w.capitalize}.join
+=> "HelloWorldRuby"
