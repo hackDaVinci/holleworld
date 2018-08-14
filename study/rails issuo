@@ -22,3 +22,7 @@ ApplicationRecord.descendants.collect { |type| type.name}
 
 # 静态页面代码下载工具
 sudo apt-get install webhttrack
+
+# 表单按时间倒序查看
+TianyanchaResponse.all.order(created_at: :desc)
+desc倒序 asc正序
