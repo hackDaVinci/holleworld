@@ -1,0 +1,37 @@
+  def extract_phones(str)
+    parsed_str = str.to_s.gsub(/[^0-9()-]+/, ' ')
+    [
+      # 大城市（区号3位数）座机号：010-87654321
+      [/\b(010|0[2-9]\d)\D*(\d{8})\b/, ->(m) { "#{m[1]}-#{m[2]}" }],
+      # 小城市（区号4位数）座机号：0838-2512345
+      [/\b(0[2-9]\d{2})\D*(\d{7,8})\b/, ->(m) { "#{m[1]}-#{m[2]}" }],
+      # 手机号
+      [/\b(1\d{10})\b/, ->(m) { m[1] }],
+      # 手机号: 189 1598 2783
+      [/\b(1\d{2} \d{4} \d{4})\b/, ->(m) { m[1].gsub(' ', '') }],
+      # 多个手机号粘在一起
+      [/\b(1\d{10})+\b/, ->(m) { m[0].scan(/1\d{10}/) }],
+      # 400电话： 4008761220
+      [/\b(400\d{7})+\b/, ->(m) { m[1] }],
+      # 400电话： 400 876 1220
+      [/\b(400 \d{3} \d{4})+\b/, ->(m) { m[1] }],
+    ].each do |re, func|
+      if m=parsed_str.match(re)
+        return Array(func.call(m)) + extract_phones(m.post_match)  + extract_phones(m.pre_match)
+      end
+    end
+    []
+  end
+  
+  邮箱验证
+    def extract_emails(str)
+    str = str.to_s.gsub(/[^0-9a-z_@.-]+/i, ' ').downcase
+    [
+      [/\b[0-9a-z_.-]+@[0-9a-z_-]+(\.[a-z0-9-]+)*\.[a-z0-9]{2,}\b/, ->(m) { m[0] }]
+    ].each do |re, func|
+      if m=str.match(re)
+        return Array(func.call(m)) + extract_emails(m.post_match)  + extract_emails(m.pre_match)
+      end
+    end
+    []
+  end
