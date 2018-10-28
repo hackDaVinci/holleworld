@@ -1,0 +1,16 @@
+1: if entities import table, use includes reduce N+1 search
+
+2: add index in migration :def change 
+                              add_index：table，：user_id 
+                           end
+                     //ordinal_index  
+                      alter table table_name add index index_name (column_list) ;
+                      //unique_index
+                      alter table table_name add unique (column_list) ;
+                      //primary_key_index
+                      alter table table_name add primary key (column_list) ;
+                      
+3：in model a
+      belongs_to :b
+      delegate :method_name, to: :model_b     # to_method
+      delegate :column_name, to: :model_b, prefix: true   #to_column
