@@ -1,0 +1,19 @@
+source 'https://gems.ruby-china.com'
+
+# 定时启动任务 
+# https://github.com/mperham/sidekiq/wiki/API
+# https://github.com/mperham/sidekiq/blob/master/lib/sidekiq/api.rb 
+gem "sidekiq-cron", "~> 0.6.3"
+gem "sidekiq", "~> 5.1"
+gem 'sidekiq-unique-jobs', '~> 6.0', '>= 6.0.6'
+
+# HTTP/REST API client library.
+gem 'faraday', '~> 0.14.0'
+
+
+# add tag
+gem 'acts-as-taggable-on', '~> 5.0'
+gem 'acts_as_list', '~> 0.9.15'
+
+# 清理html内容
+gem 'sanitize', '~> 4.6', '>= 4.6.5'
