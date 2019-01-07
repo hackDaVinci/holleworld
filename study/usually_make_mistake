@@ -1,0 +1,57 @@
+1 在查询的时候不能直接写存在数据库的数字 应找到其映射的常量
+列： news = News.where("status = ", News::PUBLISH)
+
+2 重构函数时，确保当前函数的完整性
+列： module SanitizeHtmlConcern
+       def sanitize_html
+         do_something if skip_sanitize_html?
+       end
+     end
+     
+    class RawContent < ApplicationRecord
+      include SanitizeHtmlConcern
+      def skip_sanitize_html?
+        self.news&.project_stats.present?
+      end
+    end
+    
+    这里优先确保 module SanitizeHtmlConcern的完整性
+    def skip_sanitize_html?
+      false
+    end
+    
+3 #添加一个可 read 属性，在 class 外部只可 read 该实例变量（等同于通过 instance.arg 方法），而不可对该变量赋值（相当于调用 instance.arg= 方法不存在）
+#attr_reader 的限定有点类似 C 中 int const * p的作用，限定的是变量，而非变量指向的对象。尽量是不变化的变量，否则因在方法间传递，确保安全性。
+
+4 user = { "id" => 1, "name" => "Konata Izumi", "age" => 16, "created_at" => "2006/08/01", "awesome" => true}
+  user.as_json(only: [:id, :name])
+   => { "id" => 1, "name" => "Konata Izumi" }
+   
+   user.as_json(except: [:id, :created_at, :age])
+   => { "name" => "Konata Izumi", "awesome" => true }
+   
+   To include the result of some method calls on the model use :methods:
+
+user.as_json(methods: :permalink)
+# => { "id" => 1, "name" => "Konata Izumi", "age" => 16,
+#      "created_at" => "2006/08/01", "awesome" => true,
+#      "permalink" => "1-konata-izumi" }
+
+To include associations use :include:
+user.as_json(include: :posts)
+# => { "id" => 1, "name" => "Konata Izumi", "age" => 16,
+#      "created_at" => "2006/08/01", "awesome" => true,
+#      "posts" => [ { "id" => 1, "author_id" => 1, "title" => "Welcome to the weblog" },
+#                   { "id" => 2, "author_id" => 1, "title" => "So I was thinking" } ] }
+
+Second level and higher order associations work as well:
+user.as_json(include: { posts: {
+                           include: { comments: {
+                                          only: :body } },
+                           only: :title } })
+# => { "id" => 1, "name" => "Konata Izumi", "age" => 16,
+#      "created_at" => "2006/08/01", "awesome" => true,
+#      "posts" => [ { "comments" => [ { "body" => "1st post!" }, { "body" => "Second!" } ],
+#                     "title" => "Welcome to the weblog" },
+#                   { "comments" => [ { "body" => "Don't think too hard" } ],
+#                     "title" => "So I was thinking" } ] }
